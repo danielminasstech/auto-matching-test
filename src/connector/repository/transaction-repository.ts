@@ -1,8 +1,8 @@
 import type { Pool, QueryResultRow } from "pg";
 import type {
-  Transaction,
   TransactionRepositoryInterface,
 } from "../../application/interfaces/transaction-repository-interface";
+import type { Transaction } from "../../domain/entities/transaction";
 
 type TransactionRow = QueryResultRow & {
   id: string;

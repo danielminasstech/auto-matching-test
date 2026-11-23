@@ -1,9 +1,8 @@
 import type { Pool, QueryResultRow } from "pg";
 import type {
-  BuyingInvoice,
   BuyingInvoiceRepositoryInterface,
 } from "../../application/interfaces/buying-invoice-repository-interface";
-
+import type { BuyingInvoice } from "../../domain/entities/buying-invoice";
 type BuyingInvoiceRow = QueryResultRow & {
   id: string;
   supplierName: string;

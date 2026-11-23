@@ -1,3 +1,5 @@
+import { Company } from "../../domain/entities/company";
+
 export interface CompanyRepositoryInterface {
-  findIdBySiren(siren: string): Promise<string | null>;
+  findCompanyBySiren(siren: string): Promise<Company | null>;
 }

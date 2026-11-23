@@ -1,17 +1,18 @@
 import type { Pool, QueryResultRow } from "pg";
 import type { CompanyRepositoryInterface } from "../../application/interfaces/company-repository-interface";
+import { Company } from "../../domain/entities/company";
 
 type CompanyRow = QueryResultRow & { id: string };
 
 export class CompanyRepository implements CompanyRepositoryInterface {
   constructor(private readonly pool: Pool) {}
 
-  async findIdBySiren(siren: string): Promise<string | null> {
+  async findCompanyBySiren(siren: string): Promise<Company | null> {
     const { rows } = await this.pool.query<CompanyRow>(
-      "select id from company where siren = $1 limit 1",
+      "select id, name, siren from company where siren = $1 limit 1",
       [siren],
     );
 
-    return rows[0]?.id ?? null;
+    return rows[0] ?? null;
   }
 }
