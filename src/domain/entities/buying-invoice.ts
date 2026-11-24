@@ -4,5 +4,5 @@ export interface BuyingInvoice {
   invoiceNumber: string;
   taxFreeTotal: number;
   vatAmount: number;
-  dueDate: string;
+  dueDate: string | null;
 }

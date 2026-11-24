@@ -9,7 +9,7 @@ type BuyingInvoiceRow = QueryResultRow & {
   invoiceNumber: string;
   taxFreeTotal: number;
   vatAmount: number;
-  dueDate: string;
+  dueDate: string | null;
 };
 
 export class BuyingInvoiceRepository implements BuyingInvoiceRepositoryInterface {

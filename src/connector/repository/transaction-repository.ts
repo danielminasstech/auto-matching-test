@@ -17,14 +17,14 @@ export class TransactionRepository implements TransactionRepositoryInterface {
 
   async findByCompanyId(companyId: string): Promise<Transaction[]> {
     const { rows } = await this.pool.query<TransactionRow>(
-      `select transaction.id, transaction.amount, transaction.label, transaction.date,
+        `select transaction.id, transaction.amount, transaction.label, transaction.date,
               transaction.matched_invoice_id as "matchedInvoiceId"
-       from transaction
-       join account on account.id = transaction.account_id
-       where account.company_id = $1
-         and transaction.matched_invoice_id is null
-         and transaction.deleted_at is null
-         and transaction.amount < 0`,
+        from transaction
+        join account on account.id = transaction.account_id
+        where account.company_id = $1
+          and transaction.matched_invoice_id is null
+          and transaction.deleted_at is null
+          and transaction.amount < 0`,
       [companyId],
     );
 

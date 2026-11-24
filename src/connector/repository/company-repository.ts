@@ -2,7 +2,11 @@ import type { Pool, QueryResultRow } from "pg";
 import type { CompanyRepositoryInterface } from "../../application/interfaces/company-repository-interface";
 import { Company } from "../../domain/entities/company";
 
-type CompanyRow = QueryResultRow & { id: string };
+type CompanyRow = QueryResultRow & {
+  id: string;
+  name: string;
+  siren: string;
+};
 
 export class CompanyRepository implements CompanyRepositoryInterface {
   constructor(private readonly pool: Pool) {}
