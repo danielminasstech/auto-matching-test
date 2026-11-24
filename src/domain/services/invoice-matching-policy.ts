@@ -1,8 +1,8 @@
 import type { BuyingInvoice } from "../entities/buying-invoice";
 import type { Transaction } from "../entities/transaction";
 
-const MAX_DAYS_BEFORE_DUE = 30;
-const MAX_DAYS_AFTER_DUE = 3;
+const MAX_DAYS_BEFORE_TRANSACTION = 3;
+const MAX_DAYS_AFTER_TRANSACTION = 30;
 const LABEL_MATCH_SCORE_BONUS = 100;
 
 function normalizeLabel(value: string): string {
@@ -36,7 +36,9 @@ export class InvoiceMatchingPolicy {
 
       const diff = dayDiff(transaction.date, invoice.dueDate);
       // Keep the positive form to preserve filter behavior for invalid dates (NaN).
-      if (!(diff >= -MAX_DAYS_BEFORE_DUE && diff <= MAX_DAYS_AFTER_DUE)) {
+      if (
+        !(diff >= -MAX_DAYS_AFTER_TRANSACTION && diff <= MAX_DAYS_BEFORE_TRANSACTION)
+      ) {
         continue;
       }
 
