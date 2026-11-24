@@ -5,8 +5,8 @@ const MAX_DAYS_BEFORE_TRANSACTION = 3;
 const MAX_DAYS_AFTER_TRANSACTION = 30;
 const LABEL_MATCH_SCORE_BONUS = 100;
 
-function normalizeLabel(value: string): string {
-  return value.trim().toLowerCase();
+function normalizeLabel(value: string | null): string {
+  return value?.trim().toLowerCase() ?? "";
 }
 
 function dayDiff(a: string, b: string): number {
@@ -59,10 +59,12 @@ export class InvoiceMatchingPolicy {
   ): number {
     let score = Math.abs(dueDateDifference);
     const label = normalizeLabel(transaction.label);
+    const supplierName = normalizeLabel(invoice.supplierName);
+    const invoiceNumber = normalizeLabel(invoice.invoiceNumber);
 
     if (
-      label.includes(normalizeLabel(invoice.supplierName)) ||
-      label.includes(normalizeLabel(invoice.invoiceNumber))
+      (supplierName !== "" && label.includes(supplierName)) ||
+      (invoiceNumber !== "" && label.includes(invoiceNumber))
     ) {
       score -= LABEL_MATCH_SCORE_BONUS;
     }

@@ -5,8 +5,8 @@ import type {
 import type { BuyingInvoice } from "../../domain/entities/buying-invoice";
 type BuyingInvoiceRow = QueryResultRow & {
   id: string;
-  supplierName: string;
-  invoiceNumber: string;
+  supplierName: string | null;
+  invoiceNumber: string | null;
   taxFreeTotal: number;
   vatAmount: number;
   dueDate: string | null;
